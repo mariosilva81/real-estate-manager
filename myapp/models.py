@@ -42,7 +42,22 @@ class RealEstate(models.Model):
 
 class RealEstateImage(models.Model):
     image = models.ImageField('Images', upload_to='images')
-    real_estate = models.ForeignKey(RealEstate, related_name='real_estates_images', on_delete=models.CASCADE)
+    real_estate = models.ForeignKey(RealEstate, related_name='real_estate_images', on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.real_estate.code
+
+
+class RentalRegister(models.Model):
+    real_estate = models.ForeignKey(RealEstate, related_name='rental_register', on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    start_date = models.DateTimeField('Início')
+    end_date = models.DateTimeField('Fim')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return '{} - {}'.format(self.client, self.real_estate)
+
+    class Meta:
+        verbose_name = 'Registrar Locação'
+        verbose_name_plural = 'Registrar Locação'
