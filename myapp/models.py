@@ -38,3 +38,11 @@ class RealEstate(models.Model):
     class Meta:
         verbose_name = 'Imóvel'
         verbose_name_plural = 'Imóveis'
+
+
+class RealEstateImage(models.Model):
+    image = models.ImageField('Images', upload_to='images')
+    real_estate = models.ForeignKey(RealEstate, related_name='real_estates_images', on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return self.real_estate.code
