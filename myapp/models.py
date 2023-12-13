@@ -25,7 +25,7 @@ class RealEstateTypes(models.TextChoices):
 
 class RealEstate(models.Model):
     id = models.UUIDField(default=uuid4, primary_key=True, editable=False)
-    code = models.CharField(max_length=100)
+    code = models.CharField(max_length=100, blank=True)
     type = models.CharField(max_length=100, choices=RealEstateTypes.choices)
     address = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -38,6 +38,16 @@ class RealEstate(models.Model):
     class Meta:
         verbose_name = 'Imóvel'
         verbose_name_plural = 'Imóveis'
+
+    def save(self, *args, **kwargs):
+        if not self.code:
+            self.code = self.generate_default_code()
+        super().save(*args, **kwargs)
+
+    def generate_default_code(self):
+        type_prefix = self.type[:3].upper()
+        sequential_number = RealEstate.objects.count() + 1
+        return f'{type_prefix}{sequential_number:03d}'
 
 
 class RealEstateImage(models.Model):
