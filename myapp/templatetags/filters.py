@@ -6,4 +6,4 @@ register = template.Library()
 
 @register.filter
 def currency_brl(value):
-    return format_currency(value, 'BRL', locale='pt_BR')
+    return format_currency(value, "BRL", locale="pt_BR")
