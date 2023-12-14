@@ -4,9 +4,9 @@ from django.db import models
 
 class Client(models.Model):
     id = models.UUIDField(default=uuid4, primary_key=True, editable=False)
-    name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=200)
-    phone = models.CharField(max_length=15)
+    name = models.CharField(max_length=100, verbose_name='Nome')
+    email = models.EmailField(max_length=200, verbose_name='E-mail')
+    phone = models.CharField(max_length=15, verbose_name='Telefone')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
@@ -25,11 +25,11 @@ class RealEstateTypes(models.TextChoices):
 
 class RealEstate(models.Model):
     id = models.UUIDField(default=uuid4, primary_key=True, editable=False)
-    code = models.CharField(max_length=100, blank=True)
-    type = models.CharField(max_length=100, choices=RealEstateTypes.choices)
-    address = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    is_rented = models.BooleanField(default=False)
+    code = models.CharField(max_length=100, blank=True, verbose_name='Código')
+    type = models.CharField(max_length=100, choices=RealEstateTypes.choices, verbose_name='Tipo')
+    address = models.TextField(verbose_name='Endereço')
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Valor')
+    is_rented = models.BooleanField(default=False, verbose_name='Alugado?')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
