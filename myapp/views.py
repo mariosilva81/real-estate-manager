@@ -47,3 +47,8 @@ def form_rental(request, real_estate_id):
             return redirect("list-real-estates")
     context = {"form": form, "real_estate": real_estate}
     return render(request, "form-rental.html", context)
+
+
+def reports(request):
+    real_estates = RealEstate.objects.all()
+    return render(request, "reports.html", {"real_estates": real_estates})
