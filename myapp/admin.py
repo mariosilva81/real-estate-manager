@@ -16,3 +16,7 @@ class RealEstateAdmin(admin.ModelAdmin):
 
 
 admin.site.register(RealEstate, RealEstateAdmin)
+
+admin.site.site_header = 'Real Estate Manager'
+admin.site.site_title = 'Real Estate Manager'
+admin.site.index_title = 'Painel de Administração do Real Estate Manager'
