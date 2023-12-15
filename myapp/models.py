@@ -64,11 +64,11 @@ class RealEstateImage(models.Model):
 
 class RentalRegister(models.Model):
     real_estate = models.ForeignKey(
-        RealEstate, related_name="rental_register", on_delete=models.CASCADE
+        RealEstate, related_name="rental_register", on_delete=models.CASCADE, verbose_name="Imóvel"
     )
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    start_date = models.DateTimeField("Início")
-    end_date = models.DateTimeField("Fim")
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name="Cliente")
+    start_date = models.DateTimeField(verbose_name="Data Início")
+    end_date = models.DateTimeField(verbose_name="Data Fim")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:

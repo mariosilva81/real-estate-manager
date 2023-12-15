@@ -34,12 +34,18 @@
       </div>
         <form class="col-md-4" action="{% url 'rental-create' real_estate.id %}" method="post">
             {% csrf_token %}
-            <h3>Formulário de Registro de Locação</h3>
+            <h3>Registrar Locação</h3>
             {% for field in form %}
             <div class="mt-3">
-                {{field.label}}
-                {{field}}
-            </div>
+                {% if 'start_date' in field.name %}
+                    <label>Data Início</label>
+                {% elif 'end_date' in field.name %}
+                    <label>Data Fim</label>
+                {% else %}
+                    <label>{{ field.label }}</label>
+                {% endif %}
+                {{ field }}
+            </div>            
             {% endfor %}
             <input type="submit" class="btn btn-primary mt-3" value="Locar">
         </form> 

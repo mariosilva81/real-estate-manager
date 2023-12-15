@@ -2,7 +2,7 @@
 
 {% load filters %}
 
-{% block title %}Lista de Locações{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block content %} 
  
@@ -21,6 +21,7 @@
                 <p>Valor: {{real_estate.price|currency_brl}}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="badge bg-success">Tipo: {{real_estate.type}}</div> 
+                    <a class="btn btn-primary" href="{% url 'rental-create' real_estate.id  %}">Locar</a>
                 </div>
             </div>  
         </div> 
