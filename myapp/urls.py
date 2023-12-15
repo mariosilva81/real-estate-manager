@@ -5,5 +5,5 @@ urlpatterns = [
     path("", list_real_estates, name="list-real-estates"),
     path("cadastrar/cliente", form_client, name="client-create"),
     path("cadastrar/imovel", form_real_estate, name="real-estate-create"),
-    path("locar/<int:real_estate_id>", form_rental, name="rental-create"),
+    path("locacao/<uuid:real_estate_id>", form_rental, name="rental-create"),
 ]

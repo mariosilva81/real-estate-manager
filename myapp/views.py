@@ -45,5 +45,5 @@ def form_rental(request, real_estate_id):
             real_estate.is_rented = True
             real_estate.save()
             return redirect("list-real-estates")
-    context = {"form": form, "rental": real_estate}
+    context = {"form": form, "real_estate": real_estate}
     return render(request, "form-rental.html", context)
