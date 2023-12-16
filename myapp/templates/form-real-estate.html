@@ -13,10 +13,12 @@
             {% csrf_token %} 
             <h3>Cadastrar Imóvel</h3>
             {% for field in form %}
-            <div class="mt-3">
-                {{field.label}}
-                {{field}}
-            </div>
+                {% if field.name != 'code' %}
+                    <div class="mt-3">
+                        {{ field.label }}
+                        {{ field }}
+                    </div>
+                {% endif %}
             {% endfor %} 
             <input type="submit" class="btn btn-primary mt-3" value="Salvar">
         </form>
