@@ -8,14 +8,14 @@
 
 <div class="container"> 
     <div class="row g-3 align-items-center m-3 bg-light p-3 d-flex justify-content-center">
-        <div class="col-auto">
+        <div class="col-auto text-center">
             <label for="searchInput" class="form-label"><strong>Pesquisar por cliente</strong></label>
             <form class="d-flex" action="{% url "reports" %}">
                 <input name="client" type="search" class="form-control me-2" id="searchInput" placeholder="Nome ou E-mail" aria-label="Search">
                 <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>
             </form>
         </div>
-        <div class="col-auto">
+        <div class="col-auto text-center">
             <form class="d-flex align-items-end" action="{% url "reports" %}">
                 <div class="me-2">
                     <label for="startDate" class="form-label"><strong>Data Início</strong></label>
@@ -30,7 +30,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-auto">
+        <div class="col-auto text-center">
             <form action="{% url "reports" %}">
                 <label for="statusSelect" class="form-label"><strong>Status</strong></label>
                 <select name="is_rented" class="form-select" id="statusSelect" onchange="this.form.submit()">
@@ -40,7 +40,7 @@
                 </select>
             </form>
         </div>
-        <div class="col-auto">
+        <div class="col-auto text-center">
             <form action="{% url "reports" %}">
                 <label for="typeSelect" class="form-label"><strong>Tipo de Imóvel</strong></label>
                 <select name="type" class="form-select" id="typeSelect" onchange="this.form.submit()">
@@ -60,7 +60,7 @@
     <div class="table-responsive">
         <table class="table">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th scope="col">ID</th>
                     <th scope="col">Data Início</th>
                     <th scope="col">Data Fim</th>
@@ -74,23 +74,41 @@
             <tbody>
                 {% for real_estate in real_estates %}
                 <tr>
-                    <td scope="row">{{real_estate.id}}</td>
-                    <td scope="row">{% for rental in real_estate.rental_register.all %}{{rental.start_date|date:"d/m/Y"}}{% endfor %}</td>
-                    <td scope="row">{% for rental in real_estate.rental_register.all %}{{rental.end_date|date:"d/m/Y"}}{% endfor %}</td>
-                    <td scope="row">{% for rental in real_estate.rental_register.all %}{{rental.client}}{% endfor %}</td>
-                    <td scope="row">{{real_estate.code}}</td>
-                    <td scope="row">{{real_estate.type}}</td>
-                    <td scope="row">{{real_estate.price|currency_brl}}</td>
+                    <td scope="row" class="text-center">{{ real_estate.id }}</td>
+                    <td scope="row" class="text-center">{% if real_estate.rental_register.all %}
+                        {% for rental in real_estate.rental_register.all %}
+                            {{ rental.start_date|date:"d/m/Y" }}
+                        {% endfor %}
+                    {% else %}
+                        -{% endif %}
+                    </td>
+                    <td scope="row" class="text-center">{% if real_estate.rental_register.all %}
+                        {% for rental in real_estate.rental_register.all %}
+                            {{ rental.end_date|date:"d/m/Y" }}
+                        {% endfor %}
+                    {% else %}
+                        -{% endif %}
+                    </td>
+                    <td scope="row" class="text-center">{% if real_estate.rental_register.all %}
+                        {% for rental in real_estate.rental_register.all %}
+                            {{ rental.client }}
+                        {% endfor %}
+                    {% else %}
+                        -{% endif %}
+                    </td>
+                    <td scope="row" class="text-center">{{ real_estate.code }}</td>
+                    <td scope="row" class="text-center">{{ real_estate.type }}</td>
+                    <td scope="row" class="text-center">{{ real_estate.price|currency_brl }}</td>
                     <td scope="row" class="text-center">
                         {% if real_estate.is_rented == True %}
                             <i class="fas fa-check-circle fa-2x text-success"></i>
                         {% else %}
                             <i class="fas fa-times-circle fa-2x text-danger"></i>
                         {% endif %}
-                    </td>                
-                </tr>  
+                    </td>
+                </tr>
                 {% endfor %}
-            </tbody>
+            </tbody>            
         </table>
     </div>
 </div>
