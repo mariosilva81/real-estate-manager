@@ -7,7 +7,7 @@ class Client(models.Model):
     name = models.CharField(max_length=100, verbose_name="Nome")
     email = models.EmailField(max_length=200, verbose_name="E-mail")
     phone = models.CharField(max_length=15, verbose_name="Telefone")
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateField(auto_now_add=True)
 
     def __str__(self) -> str:
         return "{} - {} - {}".format(self.name, self.email, self.phone)
@@ -32,7 +32,7 @@ class RealEstate(models.Model):
     address = models.TextField(verbose_name="Endereço")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Valor")
     is_rented = models.BooleanField(default=False, verbose_name="Alugado?")
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateField(auto_now_add=True)
 
     def __str__(self) -> str:
         return "{} - {} - {}".format(self.code, self.type, self.id)
@@ -69,7 +69,7 @@ class RentalRegister(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name="Cliente")
     start_date = models.DateTimeField(verbose_name="Data Início")
     end_date = models.DateTimeField(verbose_name="Data Fim")
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateField(auto_now_add=True)
 
     def __str__(self) -> str:
         return "{} - {}".format(self.client, self.real_estate)
