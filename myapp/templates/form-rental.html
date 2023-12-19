@@ -29,7 +29,7 @@
                 <p>Cód.: {{real_estate.code}}</p>
                 <p>Endereço: {{real_estate.address}}</p>
                 <p>Valor: {{real_estate.price|currency_brl}}</p>
-                <div class="badge bg-success">Tipo: {{real_estate.type}}</div> 
+                <div class="badge bg-success">{{real_estate.type}}</div> 
             </div> 
       </div>
         <form class="col-md-4" action="{% url 'rental-create' real_estate.id %}" method="post">

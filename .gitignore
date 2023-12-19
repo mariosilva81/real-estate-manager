@@ -13,5 +13,4 @@ static_files
 mydatabase
 file_name.sql
 __pycache__/
-/media
 .DS_Store
